@@ -1,0 +1,17 @@
+body {
+	margin: 0;
+}
+
+.project-card {
+	background-color: orange;
+	padding: 2px 14px 2px 14px;
+	margin: 12px;
+}
+
+.project-card:hover {
+	background-color: orangered;
+}
+
+.todo-card {
+	background-color: lightblue;
+}
