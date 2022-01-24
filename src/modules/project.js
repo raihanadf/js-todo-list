@@ -17,22 +17,4 @@ function deleteProject(which) {
   DOMStuff.listProject(projects)
 }
 
-const init = () => {
-
-  // for testing purposes
-  let haha = newTodo("si gandi", "lol", "gatau", "besok", "kapan", true) 
-  let hoho = newTodo("si babi", "hmm", "gatau", "besok", "kapan", false) 
-  let awok = newTodo("si iblis", "hmm", "gatau", "besok", "kapan", true) 
-  let array = [haha, hoho, awok]
-  let hihi = newProject("fuck gandi", "wow")
-  let hehe = newProject("Default", "wow")
-  projects.push(hehe)
-  projects.push(hihi)
-  projects[0].todo.push(...array)
-  projects[1].todo.push(...array)
-  DOMStuff.listProject(projects)
-  DOMStuff.ProjectAdd()
-
-}
-
-export { newProject, addProject, deleteProject, projects, init }
+export { newProject, addProject, deleteProject, projects }

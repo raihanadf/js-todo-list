@@ -1,3 +1,3 @@
-import { init } from "./modules/project";
+import DOMStuff from "./modules/dom";
 
-init()
+DOMStuff.init()

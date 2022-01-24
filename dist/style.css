@@ -17,15 +17,17 @@ div.sidebar {
 	background-color: grey;
 	width: 17em;
 	padding: 14px;
+	max-height: 87vh;
+	overflow: auto;
 }
 
-div.containerTodo {
-	display: flex;
-	flex-direction: column;
+div.todos {
 	padding: 3em;
 	max-height: 80vh;
-	flex-grow: 1;
 	overflow: auto;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
 }
 
 .header {
@@ -51,7 +53,7 @@ div.containerTodo {
 }
 
 .project-card {
-	background-color: orange;
+	background-color: greenyellow;
 }
 
 .project-card:hover {
@@ -64,4 +66,8 @@ div.containerTodo {
 
 .todo-card:hover {
 	background-color: blue;
+}
+
+.hide {
+	display: none;
 }
