@@ -1,20 +1,23 @@
 import DOMStuff from "./dom"
+import { projects } from "./project"
 
 function newTodo (title, desc, dueDate, priority, note, check) {
   return { title, desc, dueDate, priority, note, check }
 }
 
-function addTodo (value, todo) {
-  todo.push(value)
-  DOMStuff.listTodos(todo)
+function addTodo (value, index) {
+  projects[index].todo.push(value)
+  DOMStuff.listTodos(projects[index].todo, index)
 }
 
-function deleteTodo (which) {
-
+function deleteTodo (index, which) {
+  projects[index].todo.splice(which, 1)
+  DOMStuff.listTodos(projects[index].todo, index)
 }
 
-function editTodo (value, which) {
-
+const editTodo = {
+  checkList: (index, which) => {
+  },
 }
 
-export { newTodo, addTodo }
+export { newTodo, addTodo, deleteTodo }

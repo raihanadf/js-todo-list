@@ -1,76 +1,96 @@
-import { newProject, addProject, projects } from "./project"
-import { newTodo, addTodo } from "./todos"
+import { addProject, deleteProject, projects, newProject } from "./project"
+import { newTodo, addTodo, deleteTodo } from "./todos"
 
-const domContainer = document.querySelector(".container")
+const todoContainer = document.querySelector(".containerTodo")
+const projectContainer = document.querySelector(".containerProject")
+
 const DOMStuff = {
 
-  clear: () => { domContainer.innerHTML = null },
+  clearTodo: () => { todoContainer.innerHTML = null },
+  clearProject: () => { projectContainer.innerHTML = null },
 
-  listTodos: (which) => {
+  listTodos: (which, index) => {
 
-    DOMStuff.clear()
+    DOMStuff.clearTodo()
+    console.log(which)
 
     if(which.length > 0) {
       for (let i = 0; i < which.length; i++) {
-        const div = document.createElement("div")
-        const p = document.createElement("p")
-        div.classList.add("todo-card")
-        p.textContent = which[i].title
 
-        const array = [p]
+        const div = document.createElement("div")
+        const h1 = document.createElement("h1")
+        const p = document.createElement("p")
+        const isChecked = () => which[i].check ? "nice" : "gkdl"
+        div.classList.add("todo-card")
+        h1.textContent = which[i].title
+        p.textContent = isChecked()
+        const deleteBtn = document.createElement("button")
+        deleteBtn.textContent = "DELETE"
+        deleteBtn.addEventListener("click", (() => {
+          deleteTodo(index, i)
+        }))
+
+        const array = [h1, p, deleteBtn]
         array.forEach(item => div.appendChild(item))
-        domContainer.appendChild(div)
+        todoContainer.appendChild(div)
+
       }
     } else {
-      domContainer.textContent = "None"
+      todoContainer.textContent = "None"
     }
-
-    const backButton = document.createElement("button")
-    backButton.textContent = "Go Back"
-    backButton.addEventListener("click", () => DOMStuff.listProject(projects))
-    domContainer.appendChild(backButton)
 
     const addTodoButton = document.createElement("button")
     addTodoButton.textContent = "Add Todo"
     addTodoButton.addEventListener("click", () => {
       let coba = newTodo("gendeng", "ya", "kapan kapan", "low", "none")
-      addTodo(coba, which)
+      addTodo(coba, index)
     })
-    domContainer.appendChild(addTodoButton)
 
+    todoContainer.appendChild(addTodoButton)
   },
 
   listProject: (project) => {
 
-    DOMStuff.clear()
-    project.forEach(item => {
+    DOMStuff.clearProject()
+    project.forEach((item, index) => {
 
       const div = document.createElement("div")
       const h3 = document.createElement("h3")
       const p = document.createElement("p")
+      const deleteBtn = document.createElement("button")
 
       div.classList.add("project-card")
       h3.textContent = item.title
       p.textContent = item.desc
+      deleteBtn.textContent = "DELETE"
+
       div.addEventListener("click", (() => {
-        DOMStuff.listTodos(item.todo)
+        DOMStuff.listTodos(item.todo, index)
+      }))
+
+      deleteBtn.addEventListener("click", (() => {
+        deleteProject(index)
       }))
 
       let array = [h3,p]
-      array.forEach(content => div.appendChild(content))
-      domContainer.appendChild(div)
+      array.forEach((content) => { div.appendChild(content) })
+      projectContainer.appendChild(div)
+      projectContainer.appendChild(deleteBtn)
 
     })
-
-    const addProjectButton = document.createElement("button")
-    addProjectButton.textContent = "Add Project"
-    addProjectButton.addEventListener("click", () => {
-      let coba = newProject("pig", "lmaoo")
-      addProject(coba)
-    })
-    domContainer.appendChild(addProjectButton)
 
   },
+
+  ProjectAdd: () => {
+    const button = document.querySelector("#addProjectBtn")
+    button.addEventListener('click', () => {
+      const name = document.querySelector("#projectName").value
+      const desc = document.querySelector("#projectDesc").value
+      const project = newProject(name, desc)
+      name && desc ? addProject(project) : alert("yg bener")
+    })
+  }
+
 }
 
 export default DOMStuff
