@@ -1,5 +1,4 @@
 import DOMStuff from "./dom.js"
-import { newTodo } from "./todos.js"
 
 let projects = []
 
@@ -10,11 +9,17 @@ function newProject(title, desc) {
 function addProject(value) {
   projects.push(value)
   DOMStuff.listProject(projects)
+  saveProject()
 }
 
 function deleteProject(which) {
   projects.splice(which, 1)
   DOMStuff.listProject(projects)
+  saveProject()
 }
 
-export { newProject, addProject, deleteProject, projects }
+function saveProject() {
+  localStorage.setItem("projects", JSON.stringify(projects))
+}
+
+export { newProject, addProject, deleteProject, saveProject, projects }

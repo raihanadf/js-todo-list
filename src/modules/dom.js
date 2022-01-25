@@ -135,14 +135,27 @@ const DOMStuff = {
     })
   },
 
+  populateStorage: () => {
+    if(localStorage.getItem("projects") !== null){
+      projects = JSON.parse(localStorage.getItem("projects"))
+    }else{
+      console.log("test")
+    }
+  },
+
   init: () => {
 
-  // for testing purposes
-  let defaultProject = newProject("Default", "Your default project")
-  projects.push(defaultProject)
-  DOMStuff.listProject(projects)
-  DOMStuff.ProjectAdd()
-
+    //check localStorage
+    if(localStorage.getItem("projects")){
+      DOMStuff.populateStorage()
+      console.log("ada")
+    }else{
+      // for testing purposes
+      let defaultProject = newProject("Default", "Your default project")
+      projects.push(defaultProject)
+    }
+      DOMStuff.listProject(projects)
+      DOMStuff.ProjectAdd()
   }
 }
 
